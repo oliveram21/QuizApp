@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class QuestionViewController: UIViewController {
-    var question: String = ""
-    var options: [String] = []
+    private(set) var question = ""
+    private(set) var options: [String] = []
     var selection: (([String]) -> Void)? = nil
     let reuseCellIdentifier = "Cell"
     @IBOutlet weak var headerLabel: UILabel!

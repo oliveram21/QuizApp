@@ -31,6 +31,9 @@
 		843C3BF62C73A55D00809CE2 /* NavigationControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3BF52C73A55D00809CE2 /* NavigationControllerRouter.swift */; };
 		843C3BF82C748BC100809CE2 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3BF72C748BC100809CE2 /* QuestionTests.swift */; };
 		843C3BFA2C7493D000809CE2 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3BF92C7493D000809CE2 /* Question.swift */; };
+		843C3BFC2C74F50100809CE2 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3BFB2C74F50100809CE2 /* ViewControllerFactory.swift */; };
+		843C3BFE2C74F65B00809CE2 /* iOSViewControllerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3BFD2C74F65B00809CE2 /* iOSViewControllerFactoryTests.swift */; };
+		843C3C002C74F77800809CE2 /* iOSViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3BFF2C74F77800809CE2 /* iOSViewControllerFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		843C3BF52C73A55D00809CE2 /* NavigationControllerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouter.swift; sourceTree = "<group>"; };
 		843C3BF72C748BC100809CE2 /* QuestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
 		843C3BF92C7493D000809CE2 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		843C3BFB2C74F50100809CE2 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		843C3BFD2C74F65B00809CE2 /* iOSViewControllerFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSViewControllerFactoryTests.swift; sourceTree = "<group>"; };
+		843C3BFF2C74F77800809CE2 /* iOSViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSViewControllerFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +153,8 @@
 				843C3ABA2C6DFEC400809CE2 /* Info.plist */,
 				843C3BF52C73A55D00809CE2 /* NavigationControllerRouter.swift */,
 				843C3BF92C7493D000809CE2 /* Question.swift */,
+				843C3BFB2C74F50100809CE2 /* ViewControllerFactory.swift */,
+				843C3BFF2C74F77800809CE2 /* iOSViewControllerFactory.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -160,6 +168,7 @@
 				843C3B212C6F549600809CE2 /* ResultViewControllerTests.swift */,
 				843C3B272C6F68FB00809CE2 /* UITableView+Extension.swift */,
 				843C3BF72C748BC100809CE2 /* QuestionTests.swift */,
+				843C3BFD2C74F65B00809CE2 /* iOSViewControllerFactoryTests.swift */,
 			);
 			path = QuizAppTests;
 			sourceTree = "<group>";
@@ -321,9 +330,11 @@
 				843C3AE02C6E4A5100809CE2 /* QuestionViewController.swift in Sources */,
 				843C3BFA2C7493D000809CE2 /* Question.swift in Sources */,
 				843C3B2E2C70724D00809CE2 /* PresentableAnswer.swift in Sources */,
+				843C3C002C74F77800809CE2 /* iOSViewControllerFactory.swift in Sources */,
 				843C3BF62C73A55D00809CE2 /* NavigationControllerRouter.swift in Sources */,
 				843C3B302C70728900809CE2 /* CorrectAnswerCell.swift in Sources */,
 				843C3B242C6F554300809CE2 /* ResultViewController.swift in Sources */,
+				843C3BFC2C74F50100809CE2 /* ViewControllerFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843C3ADD2C6E3F3B00809CE2 /* QuestionsViewControllerTests.swift in Sources */,
+				843C3BFE2C74F65B00809CE2 /* iOSViewControllerFactoryTests.swift in Sources */,
 				843C3B222C6F549600809CE2 /* ResultViewControllerTests.swift in Sources */,
 				843C3BF42C73A36400809CE2 /* NavigationControllerRouterTests.swift in Sources */,
 				843C3AC42C6DFEC400809CE2 /* QuizAppTests.swift in Sources */,
