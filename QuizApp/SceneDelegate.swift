@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import QuizEngine1
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    var quizGame: Game!
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -19,12 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        let questionVC = QuestionViewController(question: "What is this", options: ["Option 1", "Option 2"], selection: { print($0)})
-        let _ = questionVC.view
-        let resultVC = ResultViewController(summary: "You have scored 1/2 You have scored 1/2 You have scored 1/2 You have scored 1/2 You have scored 1/2", answers: [PresentableAnswer(question: "What is this? What is this? What is this? What is this? What is this?", answer: "A TDD project A TDD project A TDD project A TDD project"), PresentableAnswer(question: "Does it have a MVVM architecture?", answer: "Does it have a MVVM architecture? Does it have a MVVM architecture? Does it have a MVVM architecture? Does it have a MVVM architecture? Does it have a MVVM architecture?", correctAnswer: "Does it have a MVVM architecture? Does it have a MVVM architecture? Does it have a MVVM architecture? Does it have a MVVM architecture? Does it have a MVVM architecture? Does it have a MVVM architecture?Does it have a MVVM architecture?"),
-                                                                                                                                                                     PresentableAnswer(question: "hjsdgfhjdshg jsdhfgsd", answer: "sdjhfjds jdshfgjkdshg jskdhgjdhgj jsdhgjdshgjk")])
-        window?.rootViewController = resultVC
-       // questionVC.tableView.allowsMultipleSelection = true
+        let question = Question.singleAnswer("What is this?")
+        let question2 = Question.multipleAnswers("What architecture did you use?")
+        let questions = [question, question2]
+        let options = [question: ["A game", "Learning project", "Quiz game"],
+                       question2: ["Layered", "Event Sourcing", "MVC"]]
+        let correctAnswers = [question: ["Learning project"],
+                              question2: ["Layered", "MVC"]]
+        
+        let navigationController = UINavigationController()
+        let viewControllersFactory = iOSViewControllerFactory(options: options, correctAnswers: correctAnswers, questions: questions)
+        
+        let router = NavigationControllerRouter(navigationController: navigationController, factory: viewControllersFactory)
+        
+        quizGame = startGame(questions, router: router, correctAnswers: correctAnswers)
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
