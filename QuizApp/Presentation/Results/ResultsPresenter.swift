@@ -14,7 +14,9 @@ struct ResultsPresenter {
     var summary: String {
         return "You have scored \(result.score) out of \(result.answers.count)"
     }
-    
+    var title: String {
+        return "Results"
+    }
     var answers: [PresentableAnswer] {
         return questions.map { question in
             guard let answers = result.answers[question],

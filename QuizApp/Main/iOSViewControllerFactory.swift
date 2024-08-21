@@ -36,7 +36,9 @@ struct iOSViewControllerFactory: ViewControllerFactory {
     
     func resultViewController(result: Result<Question<String>, [String]>) -> UIViewController {
         let presentableResult = ResultsPresenter(result: result, correctAnswers: correctAnswers, questions: questions)
-        return ResultViewController(summary: presentableResult.summary, answers: presentableResult.answers)
+        let resultsVC = ResultViewController(summary: presentableResult.summary, answers: presentableResult.answers)
+        resultsVC.title = presentableResult.title
+        return resultsVC
     }
     
     private func questionViewController(question: Question<String>, value: String, isMultipleSelection: Bool = false, answerCallback: @escaping ([String]) -> Void) -> QuestionViewController {

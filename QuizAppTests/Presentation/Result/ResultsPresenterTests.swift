@@ -15,6 +15,9 @@ class ResultsPresenterTests: XCTestCase {
     let correctAnswers = [Question.singleAnswer("Q1"): ["A1"], Question.multipleAnswers("Q2"): ["A1", "A2"]]
     let questions = [Question.singleAnswer("Q1"), Question.multipleAnswers("Q2")]
     
+    func test_title_returnFormattedTitle() {
+        XCTAssertEqual( makeSut(userWrongAnswers, correctAnswers: correctAnswers).title, "Results")
+    }
     func test_summary_withTwoQuestionsAndScoreZero_returnsSummary() {
         let sut = makeSut(userWrongAnswers, correctAnswers: correctAnswers)
         XCTAssertTrue(sut.summary == "You have scored 0 out of 2")

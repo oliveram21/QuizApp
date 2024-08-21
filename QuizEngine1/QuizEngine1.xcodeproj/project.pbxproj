@@ -18,6 +18,7 @@
 		843C3B3C2C70B91600809CE2 /* RouterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B3B2C70B91600809CE2 /* RouterSpy.swift */; };
 		843C3B3E2C70B9D900809CE2 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B3D2C70B9D900809CE2 /* Game.swift */; };
 		843C3C0C2C764CAE00809CE2 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3C0B2C764CAE00809CE2 /* Question.swift */; };
+		843C3C1B2C7686CA00809CE2 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3C1A2C7686CA00809CE2 /* QuestionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		843C3B3B2C70B91600809CE2 /* RouterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterSpy.swift; sourceTree = "<group>"; };
 		843C3B3D2C70B9D900809CE2 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		843C3C0B2C764CAE00809CE2 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		843C3C1A2C7686CA00809CE2 /* QuestionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				843C3A9D2C6BC76A00809CE2 /* FlowTest.swift */,
 				843C3B392C70B77A00809CE2 /* GameTest.swift */,
+				843C3C1A2C7686CA00809CE2 /* QuestionTests.swift */,
 				843C3B3B2C70B91600809CE2 /* RouterSpy.swift */,
 			);
 			path = QuizEngine1Tests;
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843C3A9E2C6BC76A00809CE2 /* FlowTest.swift in Sources */,
+				843C3C1B2C7686CA00809CE2 /* QuestionTests.swift in Sources */,
 				843C3B3A2C70B77A00809CE2 /* GameTest.swift in Sources */,
 				843C3B3C2C70B91600809CE2 /* RouterSpy.swift in Sources */,
 			);
