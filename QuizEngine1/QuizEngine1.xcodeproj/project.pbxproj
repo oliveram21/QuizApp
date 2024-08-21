@@ -17,6 +17,7 @@
 		843C3B3A2C70B77A00809CE2 /* GameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B392C70B77A00809CE2 /* GameTest.swift */; };
 		843C3B3C2C70B91600809CE2 /* RouterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B3B2C70B91600809CE2 /* RouterSpy.swift */; };
 		843C3B3E2C70B9D900809CE2 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B3D2C70B9D900809CE2 /* Game.swift */; };
+		843C3C0C2C764CAE00809CE2 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3C0B2C764CAE00809CE2 /* Question.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		843C3B392C70B77A00809CE2 /* GameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest.swift; sourceTree = "<group>"; };
 		843C3B3B2C70B91600809CE2 /* RouterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterSpy.swift; sourceTree = "<group>"; };
 		843C3B3D2C70B9D900809CE2 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		843C3C0B2C764CAE00809CE2 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				843C3A842C6BC74500809CE2 /* QuizEngine1.h */,
 				843C3A9B2C6BC76100809CE2 /* Flow.swift */,
 				843C3B352C70B5AD00809CE2 /* Result.swift */,
+				843C3C0B2C764CAE00809CE2 /* Question.swift */,
 				843C3B372C70B5C300809CE2 /* Router.swift */,
 				843C3B3D2C70B9D900809CE2 /* Game.swift */,
 				843C3A852C6BC74500809CE2 /* QuizEngine1.docc */,
@@ -215,6 +218,7 @@
 				843C3B382C70B5C300809CE2 /* Router.swift in Sources */,
 				843C3B3E2C70B9D900809CE2 /* Game.swift in Sources */,
 				843C3B362C70B5AD00809CE2 /* Result.swift in Sources */,
+				843C3C0C2C764CAE00809CE2 /* Question.swift in Sources */,
 				843C3A862C6BC74500809CE2 /* QuizEngine1.docc in Sources */,
 				843C3A9C2C6BC76100809CE2 /* Flow.swift in Sources */,
 			);

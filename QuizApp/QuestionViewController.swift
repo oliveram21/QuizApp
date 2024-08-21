@@ -11,21 +11,24 @@ import UIKit
 class QuestionViewController: UIViewController {
     private(set) var question = ""
     private(set) var options: [String] = []
+    var isMultipleSelection = false
     var selection: (([String]) -> Void)? = nil
     let reuseCellIdentifier = "Cell"
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    convenience init(question: String, options: [String], selection: @escaping ([String]) -> Void) {
+    convenience init(question: String, options: [String], isMultipleSelection: Bool = false, selection: @escaping ([String]) -> Void) {
         self.init()
         self.question = question
         self.options = options
         self.selection = selection
+        self.isMultipleSelection = isMultipleSelection
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.headerLabel.text = question
+        self.tableView.allowsMultipleSelection = isMultipleSelection
     }
 }
 

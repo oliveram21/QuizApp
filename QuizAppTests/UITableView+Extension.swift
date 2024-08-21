@@ -31,4 +31,8 @@ extension UITableView {
     func cell(for row: Int) -> UITableViewCell? {
         return dataSource?.tableView(self, cellForRowAt: IndexPath(row: row, section: 1))
     }
+    
+    func rowsCount() -> Int {
+        return self.dataSource?.tableView(self, numberOfRowsInSection: 0) ?? 0
+    }
 }

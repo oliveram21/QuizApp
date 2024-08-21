@@ -7,10 +7,11 @@
 
 import Foundation
 
-enum Question<T: Hashable>: Hashable {
+public enum Question<T: Hashable>: Hashable {
     case singleAnswer(T)
     case multipleAnswers(T)
-    func hash(into hasher: inout Hasher) {
+    
+    public func hash(into hasher: inout Hasher) {
         switch self {
             case .multipleAnswers(let a): a.hash(into: &hasher)
             case .singleAnswer(let a): a.hash(into: &hasher)

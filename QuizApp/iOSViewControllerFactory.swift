@@ -11,29 +11,42 @@ import QuizEngine1
 
 struct iOSViewControllerFactory: ViewControllerFactory {
     private var options: [Question<String>:[String]]
+    private var correctAnswers:  [Question<String>:[String]]
+    private var questions: [Question<String>]
     
-    init(options: [Question<String> : [String]]) {
+    init(options: [Question<String> : [String]], correctAnswers: [Question<String> : [String]], questions: [Question<String>]) {
         self.options = options
+        self.correctAnswers = correctAnswers
+        self.questions = questions
     }
     
     func questionViewController(question: Question<String>, answerCallback: @escaping ([String]) -> Void) -> UIViewController {
-        guard let options = options[question] else {
-            fatalError("No options for question:\(question)")
-        }
+       
         switch question {
             case .singleAnswer(let questionValue):
-                return QuestionViewController(question: questionValue , options: options, selection: answerCallback)
+                let questionViewController = questionViewController(question: question, value: questionValue, answerCallback: answerCallback)
+                return questionViewController
             case .multipleAnswers(let questionValue):
-                let questionViewController = QuestionViewController(question: questionValue, options: options, selection: answerCallback)
-                _ = questionViewController.view
-            questionViewController.tableView.allowsMultipleSelection = true
-            return questionViewController
+            let questionViewController = questionViewController(question: question, value: questionValue, isMultipleSelection: true, answerCallback: answerCallback)
+                return questionViewController
+        @unknown default: 
+            fatalError("Missing question case")
         }
     }
     
     func resultViewController(result: Result<Question<String>, [String]>) -> UIViewController {
-        return UIViewController()
+        let presentableResult = ResultsPresenter(result: result, correctAnswers: correctAnswers, questions: questions)
+        return ResultViewController(summary: presentableResult.summary, answers: presentableResult.answers)
     }
     
+    private func questionViewController(question: Question<String>, value: String, isMultipleSelection: Bool = false, answerCallback: @escaping ([String]) -> Void) -> QuestionViewController {
+        guard let options = options[question] else {
+            fatalError("No options for question:\(question)")
+        }
+        let questionPresenter = QuestionPresenter(question: question, questions: questions)
+        let questionViewController = QuestionViewController(question: value, options: options, isMultipleSelection: isMultipleSelection, selection: answerCallback)
+        questionViewController.title = questionPresenter.title
+        return questionViewController
+    }
     
 }

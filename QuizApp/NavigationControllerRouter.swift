@@ -19,12 +19,60 @@ class NavigationControllerRouter: Router {
     }
     
     func routeTo(question: Question<String>, answerCallback: @escaping ([String]) -> Void) {
-        let questionVC = viewControllerFactory.questionViewController(question: question, answerCallback: answerCallback)
-        self.navigationController.pushViewController(questionVC, animated: true)
+        switch question {
+        case .singleAnswer(_):
+            show(viewControllerFactory.questionViewController(question: question, answerCallback: answerCallback))
+        case .multipleAnswers(_):
+            let button = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
+            let buttonController = SubmitButtonController(button, answerCallback)
+            button.isEnabled = false
+            let questionVC = viewControllerFactory.questionViewController(question: question, answerCallback: { selection in
+                buttonController.updateModel(selection)
+            })
+            questionVC.navigationItem.rightBarButtonItem = button
+            show(questionVC)
+        @unknown default: break
+            
+        }
     }
     
     func routeTo(result: Result<Question<String>, [String]>) {
-        let resultVC = viewControllerFactory.resultViewController(result: result)
-        self.navigationController.pushViewController(resultVC, animated: true)
+        show(viewControllerFactory.resultViewController(result: result))
+    }
+    
+    private func show(_ viewController: UIViewController) {
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+}
+
+private class SubmitButtonController: NSObject {
+    private let button: UIBarButtonItem
+    private let submitCallBack: ([String]) -> Void
+    private var model: [String] = []
+    
+    init(_ button: UIBarButtonItem, _ submitCallBack: @escaping ([String]) -> Void) {
+        self.button = button
+        self.submitCallBack = submitCallBack
+        super.init()
+        setupButton()
+        updateButtonState()
+    }
+    
+    func updateModel(_ model: [String]) {
+        self.model = model
+        updateButtonState()
+    }
+    
+    func updateButtonState() {
+        button.isEnabled = !self.model.isEmpty
+    }
+    
+    func setupButton() {
+        button.target = self
+        button.action = #selector(submit)
+    }
+    
+    @objc func submit() {
+        submitCallBack(model)
     }
 }
