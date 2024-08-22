@@ -20,6 +20,6 @@ platform :ios do
     setup_circle_ci
   end
   lane :unittest do
-      scan(scheme: "CI", device:"iPhone 15 Pro",  sdk:"iphonesimulator", output_style:"raw")#, suppress_xcode_output: true)
+      scan(scheme: "CI", device:"iPhone 15 Pro",  sdk:"iphonesimulator", output_style:"raw", include_simulator_logs:false)#, suppress_xcode_output: true)
   end
 end
