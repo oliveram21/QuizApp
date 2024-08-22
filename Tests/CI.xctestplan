@@ -22,8 +22,8 @@
     {
       "target" : {
         "containerPath" : "container:QuizEngine1\/QuizEngine1.xcodeproj",
-        "identifier" : "843C3A8A2C6BC74500809CE2",
-        "name" : "QuizEngine1Tests"
+        "identifier" : "84AC0CCE2C77B5B300345BB6",
+        "name" : "QuizEngine_iOSTests"
       }
     }
   ],
