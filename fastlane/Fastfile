@@ -16,9 +16,14 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Run tests"
+  before_all do
+    setup_circle_ci
+  end
   lane :unittest do
       schemeName = "QuizApp"#ENV['FASTLANE_SCHEME_NAME']
-      scan(scheme: schemeName, device:"iPhone 15 Pro", suppress_xcode_output:false)
+      scan(scheme: schemeName, device:"iPhone 15 Pro",  sdk:"iphonesimulator")#, suppress_xcode_output:false)
+    #else
+      puts("Testing is disabled for #{ENV['FASTLANE_SCHEME_NAME']}")
+    #end
   end
 end
