@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "1CD75228-0C6A-4A2C-8245-B1A7711F22E5",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:QuizApp.xcodeproj",
+      "identifier" : "843C3AA82C6DFEC300809CE2",
+      "name" : "QuizApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:QuizApp.xcodeproj",
+        "identifier" : "843C3ABE2C6DFEC400809CE2",
+        "name" : "QuizAppTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:QuizApp.xcodeproj",
+        "identifier" : "843C3AC82C6DFEC400809CE2",
+        "name" : "QuizAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "2808AD96-BB43-40E8-97A3-48174408F68B",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:QuizApp.xcodeproj",
+        "identifier" : "843C3ABE2C6DFEC400809CE2",
+        "name" : "QuizAppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:QuizEngine1\/QuizEngine1.xcodeproj",
+        "identifier" : "843C3A8A2C6BC74500809CE2",
+        "name" : "QuizEngine1Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
