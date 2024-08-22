@@ -11,7 +11,7 @@ public protocol Game {
 }
 extension Flow: Game {
 }
-public func startGame<Question: Hashable, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
+public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
     let flow = Flow(questions: questions, router: router, scoring: scoring(correctAnswers: correctAnswers))
     flow.start()
     return flow

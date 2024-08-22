@@ -73,7 +73,7 @@ public class iOSViewControllerFactoryTests: XCTestCase {
     
     func test_resultViewController_withResult_createsResultController() {
         let sut = createSut()
-        let result = Result(answers: userCorrectAnswers, score: 0)
+        let result = Result.make(answers: userCorrectAnswers, score: 0)
         XCTAssertNotNil(sut.resultViewController(result: result))
     }
     
@@ -107,7 +107,7 @@ public class iOSViewControllerFactoryTests: XCTestCase {
         let sut = createSut()
         let answers =  [Question.singleAnswer("Q1"): ["A1"],
                         Question.multipleAnswers("Q2"): ["A2","A3"]]
-        let result = Result(answers: answers, score: 0)
+        let result = Result.make(answers: answers, score: 0)
         let resultPresenter = ResultsPresenter(result: result, correctAnswers: correctAnswers, questions: questions)
         let controller = sut.resultViewController(result: result) as? ResultViewController
         return (controller!, resultPresenter)

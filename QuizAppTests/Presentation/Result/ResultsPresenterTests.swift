@@ -56,7 +56,7 @@ class ResultsPresenterTests: XCTestCase {
     //MARK: helpers
     func makeSut(_ userAnswers: [Question<String>: [String]], correctAnswers: [Question<String>: [String]], score: Int = 0) -> ResultsPresenter {
         
-        let result = Result(answers: userAnswers, score: score)
+        let result = Result.make(answers: userAnswers, score: score)
         return ResultsPresenter(result: result, correctAnswers: correctAnswers, questions: questions)
     }
 }
