@@ -7,4 +7,10 @@
    <FileRef
       location = "container:QuizApp.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:QuizApp.xctestplan">
+   </FileRef>
+   <FileRef
+      location = "group:../QuiEngine.xctestplan">
+   </FileRef>
 </Workspace>

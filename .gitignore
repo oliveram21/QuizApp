@@ -1,2 +1,6 @@
 output/QuizEngine1.xcframework
 Breakpoints_v2.xcbkptlist
+fastlane/README.md
+fastlane/report.xml
+fastlane/test_output/report.html
+fastlane/test_output/report.junit
