@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(*, deprecated)
 public protocol Router<Question, Answer> where Question: Hashable {
     associatedtype Question
     associatedtype Answer
