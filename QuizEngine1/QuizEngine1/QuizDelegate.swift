@@ -1,8 +1,8 @@
 //
-//  Router.swift
+//  QuizDelegate.swift
 //  QuizEngine1
 //
-//  Created by Olivera Miatovici on 17.08.2024.
+//  Created by Olivera Miatovici on 23.08.2024.
 //
 
 import Foundation
@@ -14,13 +14,4 @@ public protocol QuizDelegate<Question, Answer> where Question: Hashable {
     
     func handle(question: Question, answerCallback: @escaping AnswerCallback)
     func handle(result: Result<Question, Answer>)
-}
-
-@available(*, deprecated)
-public protocol Router<Question, Answer> where Question: Hashable {
-    associatedtype Question
-    associatedtype Answer
-    
-    func routeTo(question: Question, answerCallback: @escaping (Answer) -> Void)
-    func routeTo(result: Result<Question, Answer>)
 }

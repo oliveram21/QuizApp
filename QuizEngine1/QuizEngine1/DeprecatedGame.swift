@@ -13,6 +13,15 @@ extension Flow: Game {
 }
 
 @available(*, deprecated)
+public protocol Router<Question, Answer> where Question: Hashable {
+    associatedtype Question
+    associatedtype Answer
+    
+    func routeTo(question: Question, answerCallback: @escaping (Answer) -> Void)
+    func routeTo(result: Result<Question, Answer>)
+}
+
+@available(*, deprecated)
 public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
     let flow = Flow(questions: questions, delegate: QuizDelegateAdapter(router: router), scoring: scoring(correctAnswers: correctAnswers))
     flow.start()
