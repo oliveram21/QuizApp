@@ -10,24 +10,23 @@ import XCTest
 import QuizEngine1
 
 class QuestionTests: XCTestCase {
-    func test_hashValue_singleAnswer_equalTypeHashValue() {
-        XCTAssertEqual(Question.singleAnswer("question").hashValue, "question".hashValue)
-    }
-    func test_hashValue_MultipleAnswer_equalTypeHashValue() {
-        XCTAssertEqual(Question.multipleAnswers("question").hashValue, "question".hashValue)
-    }
-    func test_equal_singleAnswers_equalQuestion() {
-        XCTAssertEqual(Question.singleAnswer("question"), Question.singleAnswer("question"))
+   
+    func test_equal_singleAnswers() {
+        let value = UUID()
+        XCTAssertEqual(Question.singleAnswer(value), Question.singleAnswer(value))
     }
    
-    func test_equal_multipleAnswers_equalQuestion() {
-        XCTAssertEqual(Question.multipleAnswers("question"), Question.multipleAnswers("question"))
+    func test_equal_multipleAnswers() {
+        let value = UUID()
+        XCTAssertEqual(Question.multipleAnswers(value), Question.multipleAnswers(value))
     }
     
     func test_notEqual_isNotEqual() {
-        XCTAssertNotEqual(Question.multipleAnswers("question"), Question.singleAnswer("question1"))
-        XCTAssertNotEqual(Question.multipleAnswers("question"), Question.multipleAnswers("question1"))
-        XCTAssertNotEqual(Question.singleAnswer("question"), Question.singleAnswer("question1"))
-        XCTAssertNotEqual(Question.singleAnswer("question"), Question.multipleAnswers("question1"))
+        let value = UUID()
+        let anotherValue = UUID()
+        XCTAssertNotEqual(Question.multipleAnswers(value), Question.singleAnswer(anotherValue))
+        XCTAssertNotEqual(Question.multipleAnswers(value), Question.multipleAnswers(anotherValue))
+        XCTAssertNotEqual(Question.singleAnswer(value), Question.singleAnswer(anotherValue))
+        XCTAssertNotEqual(Question.singleAnswer(value), Question.multipleAnswers(value))
     }
 }
