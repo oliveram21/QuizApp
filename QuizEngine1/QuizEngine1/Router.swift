@@ -20,7 +20,7 @@ public protocol QuizDelegate<Question, Answer> where Question: Hashable {
 public protocol Router<Question, Answer> where Question: Hashable {
     associatedtype Question
     associatedtype Answer
-    typealias AnswerCallback = (Answer) -> Void
-    func routeTo(question: Question, answerCallback: @escaping AnswerCallback)
+    
+    func routeTo(question: Question, answerCallback: @escaping (Answer) -> Void)
     func routeTo(result: Result<Question, Answer>)
 }

@@ -14,7 +14,7 @@ extension Flow: Game {
 
 @available(*, deprecated)
 public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
-    let flow = Flow(questions: questions, router: router, scoring: scoring(correctAnswers: correctAnswers))
+    let flow = Flow(questions: questions, router: QuizDelegateAdapter(router: router), scoring: scoring(correctAnswers: correctAnswers))
     flow.start()
     return flow
 }
@@ -24,5 +24,23 @@ func scoring<Question, Answer: Equatable>(correctAnswers: [Question: Answer]) ->
         return correctAnswers.reduce(0) { score, tuple in
             return score + (answers[tuple.key] == tuple.value ? 1 : 0)
         }
+    }
+}
+
+@available(*, deprecated)
+private class QuizDelegateAdapter<R: Router>: QuizDelegate {
+    
+    private var router: R
+    
+    init(router: R) {
+        self.router = router
+    }
+    
+    func handle(question: R.Question, answerCallback: @escaping AnswerCallback) {
+        router.routeTo(question: question, answerCallback: answerCallback)
+    }
+    
+    func handle(result: Result<R.Question, R.Answer>) {
+        router.routeTo(result: result)
     }
 }
