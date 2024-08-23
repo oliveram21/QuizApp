@@ -18,6 +18,7 @@
 		843C3C0C2C764CAE00809CE2 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3C0B2C764CAE00809CE2 /* Question.swift */; };
 		843C3C1B2C7686CA00809CE2 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3C1A2C7686CA00809CE2 /* QuestionTests.swift */; };
 		84759E252C78E1B600B5E036 /* QuizDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E242C78E1B600B5E036 /* QuizDelegate.swift */; };
+		84759E272C78E24F00B5E036 /* QuizTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E262C78E24F00B5E036 /* QuizTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		843C3C0B2C764CAE00809CE2 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		843C3C1A2C7686CA00809CE2 /* QuestionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
 		84759E242C78E1B600B5E036 /* QuizDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDelegate.swift; sourceTree = "<group>"; };
+		84759E262C78E24F00B5E036 /* QuizTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				843C3A9D2C6BC76A00809CE2 /* FlowTest.swift */,
 				843C3B392C70B77A00809CE2 /* DeprecatedGameTest.swift */,
 				843C3C1A2C7686CA00809CE2 /* QuestionTests.swift */,
+				84759E262C78E24F00B5E036 /* QuizTest.swift */,
 			);
 			path = QuizEngine1Tests;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			files = (
 				843C3A9E2C6BC76A00809CE2 /* FlowTest.swift in Sources */,
 				843C3C1B2C7686CA00809CE2 /* QuestionTests.swift in Sources */,
+				84759E272C78E24F00B5E036 /* QuizTest.swift in Sources */,
 				843C3B3A2C70B77A00809CE2 /* DeprecatedGameTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
