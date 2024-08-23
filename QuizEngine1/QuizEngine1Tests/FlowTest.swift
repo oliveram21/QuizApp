@@ -10,7 +10,7 @@ import XCTest
 @testable import QuizEngine1
 
 class FlowTest: XCTestCase {
-    let router = RouterSpy()
+    private let router = RouterSpy()
    
     func test_start_withNoQuestion_doesNotRouteToQuestion() {
       
@@ -110,9 +110,24 @@ class FlowTest: XCTestCase {
         XCTAssertEqual(router.routedResult?.score,  10)
     }
     //MARK: Helpers
-    func makeSut(questions: [String], 
+    private func makeSut(questions: [String], 
                  scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<String, String, RouterSpy> {
         return Flow(questions: questions, router: router, scoring: scoring)
+    }
+    
+    private class RouterSpy: Router {
+        var routedQuestions: [String] = []
+        var routedResult: Result<String, String>?
+        var answerCallback: ((String) -> Void) = {_ in}
+        
+        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
+            routedQuestions.append(question)
+            self.answerCallback = answerCallback
+        }
+        
+        func routeTo(result: Result<String, String>) {
+            routedResult = result
+        }
     }
 }
 

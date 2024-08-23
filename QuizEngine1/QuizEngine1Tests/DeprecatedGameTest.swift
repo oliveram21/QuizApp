@@ -8,8 +8,9 @@
 import XCTest
 import QuizEngine1
 
-final class GameTest: XCTestCase {
-    let router = RouterSpy()
+@available(*, deprecated)
+final class DeprecatedGameTest: XCTestCase {
+    private let router = RouterSpy()
     var game: Game!
     func test_startGame_withAnswerZeroOutOfTwoCorrecly_scoresZero() {
         let router = RouterSpy()
@@ -37,5 +38,20 @@ final class GameTest: XCTestCase {
         router.answerCallback("A1")
         router.answerCallback("A2")
         XCTAssertEqual(router.routedResult!.score, 2)
+    }
+    
+    private class RouterSpy: Router {
+        var routedQuestions: [String] = []
+        var routedResult: Result<String, String>?
+        var answerCallback: ((String) -> Void) = {_ in}
+        
+        func routeTo(question: String, answerCallback: @escaping (String) -> Void) {
+            routedQuestions.append(question)
+            self.answerCallback = answerCallback
+        }
+        
+        func routeTo(result: Result<String, String>) {
+            routedResult = result
+        }
     }
 }
