@@ -35,12 +35,21 @@ xcodebuild \
         -configuration Release \
         -destination "generic/platform=iOS Simulator" \
         -archivePath build/$FRAMEWORK_SCHEME-iOS_Simulator.xcarchive
-
+xcodebuild \
+    archive \
+        SKIP_INSTALL=NO \
+        BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+        -workspace $WORKSPACE_NAME \
+        -scheme $FRAMEWORK_SCHEME \
+        -configuration Release \
+        -destination "generic/platform=macOS" \
+        -archivePath build/$FRAMEWORK_SCHEME-macOS.xcarchive
 # Convert the archives to .framework
 # and package them both into one xcframework
 xcodebuild \
     -create-xcframework \
     -archive build/$FRAMEWORK_SCHEME-iOS.xcarchive -framework $FRAMEWORK_SCHEME.framework \
     -archive build/$FRAMEWORK_SCHEME-iOS_Simulator.xcarchive -framework $FRAMEWORK_SCHEME.framework \
+    -archive build/$FRAMEWORK_SCHEME-macOS.xcarchive -framework $FRAMEWORK_SCHEME.framework \
     -output output/$FRAMEWORK_SCHEME.xcframework &&\
     rm -rf build
