@@ -7,12 +7,20 @@
 
 import Foundation
 
-public protocol QuizDelegate<Question, Answer> where Question: Hashable {
-    associatedtype Question
+public protocol QuizDelegate{//<Question, Answer> where Question: Hashable {
+    associatedtype Question: Hashable
     associatedtype Answer
     
     func answer(for question: Question, completion:@escaping (Answer) -> Void)
-  //  func didCompleteQuiz(with asnswers: [(question: Question, answer:Answer)])
+    func didCompleteQuiz(with asnswers: [(question: Question, answer:Answer)])
+    
+    @available(*, deprecated, message: "use didCompleteQuiz(wit answers)")
     func handle(result: Result<Question, Answer>)
 
+}
+
+public extension QuizDelegate {
+    func didCompleteQuiz(with asnswers: [(question: Question, answer:Answer)]) {
+        
+    }
 }

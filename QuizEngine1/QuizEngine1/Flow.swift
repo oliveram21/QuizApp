@@ -20,29 +20,26 @@ class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == An
     }
     
     func start() {
-        if let firstQuestion = questions.first {
-            delegate.handle(question: firstQuestion, answerCallback: nextCallback(from: firstQuestion))
+        delegateQuestionHandling(at: questions.startIndex)
+    }
+    private func delegateQuestionHandling(at index: Int) {
+        if index < questions.endIndex {
+            let question = questions[index]
+            delegate.answer(for: question, completion: answer(for: question, at: index))
         } else {
             delegate.handle(result: createResult())
         }
     }
-    
-    private func nextCallback(from question: Question) -> (Answer) -> Void {
-        return { [weak self] in self?.delegateQuestionHandling(question, $0) }
-    }
-    
-    private func delegateQuestionHandling(_ question: Question, _ answer: Answer) {
-        guard let currentIndex = questions.firstIndex(of: question) else { return }
-        answers[question] = answer
-        let nextQuestionIndex = questions.index(after: currentIndex)
-        if nextQuestionIndex != questions.endIndex {
-            let nextQuestion = questions[nextQuestionIndex]
-            delegate.handle(question: nextQuestion,
-                                    answerCallback: nextCallback(from: nextQuestion))
-        } else {
-            delegate.handle(result: createResult())
+    private func answer(for question: Question, at index: Int) -> (Answer) -> Void {
+        return { [weak self] answer in
+            self?.answers[question] = answer
+            self?.delegateQuestionHandling(after: index)
         }
     }
+    private func delegateQuestionHandling(after index: Int) {
+       delegateQuestionHandling(at: questions.index(after: index))
+    }
+   
     private func createResult() -> Result<Question, Answer> {
         return Result(answers: answers, score: scoring(answers))
     }
