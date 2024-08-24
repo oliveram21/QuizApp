@@ -38,15 +38,15 @@ func scoring<Question, Answer: Equatable>(correctAnswers: [Question: Answer]) ->
 
 @available(*, deprecated)
 private class QuizDelegateAdapter<R: Router>: QuizDelegate {
-    
+  
     private var router: R
     
     init(router: R) {
         self.router = router
     }
     
-    func handle(question: R.Question, answerCallback: @escaping AnswerCallback) {
-        router.routeTo(question: question, answerCallback: answerCallback)
+    func answer(for question: R.Question, completion:@escaping (R.Answer) -> Void) {
+        router.routeTo(question: question, answerCallback: completion)
     }
     
     func handle(result: Result<R.Question, R.Answer>) {

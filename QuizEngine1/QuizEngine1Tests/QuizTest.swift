@@ -18,8 +18,8 @@ final class QuizTest: XCTestCase {
         quiz = Quiz.start(["Q1","Q2"], delegate: delegate, correctAnswers: ["Q1": "A1",
                                                  "Q2": "A2"])
         
-        delegate.answerCallback("C")
-        delegate.answerCallback("B")
+        delegate.answerCompletion("C")
+        delegate.answerCompletion("B")
         XCTAssertEqual(delegate.handledResult!.score, 0)
     }
     func test_startQuiz_withAnswerOneOutOfTwoCorrecly_scoresOne() {
@@ -27,8 +27,8 @@ final class QuizTest: XCTestCase {
         quiz = Quiz.start(["Q1","Q2"], delegate: delegate, correctAnswers: ["Q1": "A1",
                                                  "Q2": "A2"])
         
-        delegate.answerCallback("A1")
-        delegate.answerCallback("B")
+        delegate.answerCompletion("A1")
+        delegate.answerCompletion("B")
         XCTAssertEqual(delegate.handledResult!.score, 1)
     }
     func test_startQuiz_withAnswerTwoCorrecly_scoresTwo() {
@@ -36,19 +36,19 @@ final class QuizTest: XCTestCase {
         quiz = Quiz.start(["Q1","Q2"], delegate: delegate, correctAnswers: ["Q1": "A1",
                                                  "Q2": "A2"])
         
-        delegate.answerCallback("A1")
-        delegate.answerCallback("A2")
+        delegate.answerCompletion("A1")
+        delegate.answerCompletion("A2")
         XCTAssertEqual(delegate.handledResult!.score, 2)
     }
     
     private class DelegateSpy: QuizDelegate {
         var handledQuestions: [String] = []
         var handledResult: Result<String, String>?
-        var answerCallback: ((String) -> Void) = {_ in}
+        var answerCompletion: ((String) -> Void) = {_ in}
         
-        func handle(question: String, answerCallback: @escaping (String) -> Void) {
+        func answer(for question: String, completion: @escaping (String) -> Void) {
             handledQuestions.append(question)
-            self.answerCallback = answerCallback
+            self.answerCompletion = completion
         }
         
         func handle(result: QuizEngine1.Result<String, String>) {

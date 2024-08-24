@@ -10,8 +10,9 @@ import Foundation
 public protocol QuizDelegate<Question, Answer> where Question: Hashable {
     associatedtype Question
     associatedtype Answer
-    typealias AnswerCallback = (Answer) -> Void
     
-    func handle(question: Question, answerCallback: @escaping AnswerCallback)
+    func answer(for question: Question, completion:@escaping (Answer) -> Void)
+  //  func didCompleteQuiz(with asnswers: [(question: Question, answer:Answer)])
     func handle(result: Result<Question, Answer>)
+
 }
