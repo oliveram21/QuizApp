@@ -13,6 +13,7 @@ import XCTest
 final class QuizTest: XCTestCase {
     private let delegate = DelegateSpy()
     var quiz: Quiz!
+    
     func test_startQuiz_withAnswerZeroOutOfTwoCorrecly_scoresZero() {
         let delegate = DelegateSpy()
         quiz = Quiz.start(["Q1","Q2"], delegate: delegate, correctAnswers: ["Q1": "A1",
@@ -20,39 +21,28 @@ final class QuizTest: XCTestCase {
         
         delegate.answerCompletion("C")
         delegate.answerCompletion("B")
-        XCTAssertEqual(delegate.handledResult!.score, 0)
+        XCTAssertEqual(delegate.completedQuizes.count, 1)
+        assertEqual(delegate.completedQuizes[0], [("Q1","C"),("Q2","B")])
     }
-    func test_startQuiz_withAnswerOneOutOfTwoCorrecly_scoresOne() {
-        let delegate = DelegateSpy()
-        quiz = Quiz.start(["Q1","Q2"], delegate: delegate, correctAnswers: ["Q1": "A1",
-                                                 "Q2": "A2"])
-        
-        delegate.answerCompletion("A1")
-        delegate.answerCompletion("B")
-        XCTAssertEqual(delegate.handledResult!.score, 1)
-    }
-    func test_startQuiz_withAnswerTwoCorrecly_scoresTwo() {
-        let delegate = DelegateSpy()
-        quiz = Quiz.start(["Q1","Q2"], delegate: delegate, correctAnswers: ["Q1": "A1",
-                                                 "Q2": "A2"])
-        
-        delegate.answerCompletion("A1")
-        delegate.answerCompletion("A2")
-        XCTAssertEqual(delegate.handledResult!.score, 2)
+    
+    func assertEqual(_ a1: [(String, String)], _ a2: [(String, String)], file: StaticString = #file,line: UInt = #line) {
+        XCTAssertEqual(a1.elementsEqual(a2, by: ==), true, file: file, line: line)
     }
     
     private class DelegateSpy: QuizDelegate {
-        var handledQuestions: [String] = []
-        var handledResult: Result<String, String>?
+        var completedQuizes: [[(String, String)]] = []
         var answerCompletion: ((String) -> Void) = {_ in}
         
         func answer(for question: String, completion: @escaping (String) -> Void) {
-            handledQuestions.append(question)
             self.answerCompletion = completion
         }
         
+        func didCompleteQuiz(with answers: [(question: String, answer: String)]) {
+            completedQuizes.append(answers)
+        }
+        
         func handle(result: QuizEngine1.Result<String, String>) {
-            handledResult = result
+           
         }
     }
 }

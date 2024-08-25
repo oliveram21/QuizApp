@@ -30,7 +30,7 @@ class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == An
             delegate.answer(for: question, completion: answer(for: question, at: index))
         } else {
             delegate.didCompleteQuiz(with: newAnswers)
-            delegate.handle(result: createResult())
+           // delegate.handle(result: createResult())
         }
     }
     private func answer(for question: Question, at index: Int) -> (Answer) -> Void {
