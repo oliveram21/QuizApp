@@ -99,22 +99,10 @@ class FlowTest: XCTestCase {
         delegate.answerCallback("A2")
         assertEqual(delegate.completedQuizes[0], [("Q1","A1"),("Q2","A2")])
     }
-    func test_startAndAsnwerFirstAndSecond_withTwoQuestions_scores() {
-        var result: [String: String] = [:]
-        let sut = makeSut(questions: ["Q1","Q2"], scoring: { answers in
-            result = answers
-            return 10
-        })
-        sut.start()
-        delegate.answerCallback("A1")
-        delegate.answerCallback("A2")
-        XCTAssertEqual(result,  ["Q1":"A1","Q2":"A2"])
-        XCTAssertEqual(delegate.handledResult?.score,  10)
-    }
+    
     //MARK: Helpers
-    private func makeSut(questions: [String], 
-                 scoring: @escaping ([String: String]) -> Int = { _ in 0 }) -> Flow<String, String, DelegateSpy> {
-        return Flow(questions: questions, delegate: delegate, scoring: scoring)
+    private func makeSut(questions: [String]) -> Flow<String, String, DelegateSpy> {
+        return Flow(questions: questions, delegate: delegate)
     }
     
     func assertEqual(_ a1: [(String, String)], _ a2: [(String, String)], file: StaticString = #file,line: UInt = #line) {

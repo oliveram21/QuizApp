@@ -7,8 +7,8 @@
 
 import Foundation
 
-public protocol QuizDelegate{//<Question, Answer> where Question: Hashable {
-    associatedtype Question: Hashable
+public protocol QuizDelegate <Question, Answer> where Question: Hashable {
+    associatedtype Question
     associatedtype Answer
     
     func answer(for question: Question, completion:@escaping (Answer) -> Void)

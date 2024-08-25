@@ -14,7 +14,8 @@ class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == An
     private var answers: [Question: Answer] = [:]
     private let scoring: ([Question: Answer]) -> Int
     
-    init(questions: [Question], delegate: Delegate, scoring: @escaping ([Question: Answer]) -> Int) {
+   
+    init(questions: [Question], delegate: Delegate, scoring: @escaping ([Question: Answer]) -> Int = { _ in 0}) {
         self.questions = questions
         self.delegate = delegate
         self.scoring = scoring
