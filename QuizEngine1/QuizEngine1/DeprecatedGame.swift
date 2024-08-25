@@ -23,7 +23,7 @@ public protocol Router<Question, Answer> where Question: Hashable {
 
 @available(*, deprecated)
 public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
-    let flow = Flow(questions: questions, delegate: QuizDelegateAdapter(router: router, correctAnswers), scoring: scoring(correctAnswers: correctAnswers))
+    let flow = Flow(questions: questions, delegate: QuizDelegateAdapter(router: router, correctAnswers))
     flow.start()
     return flow
 }
