@@ -14,7 +14,7 @@ final class QuizTest: XCTestCase {
     private let delegate = DelegateSpy()
     var quiz: Quiz!
     
-    func test_startQuiz_withAnswerZeroOutOfTwoCorrecly_scoresZero() {
+    func test_startQuiz_answersAllQuestions_completesQuiz() {
         let delegate = DelegateSpy()
         quiz = Quiz.start(["Q1","Q2"], delegate: delegate)
         
