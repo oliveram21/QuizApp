@@ -23,7 +23,7 @@ public protocol Router<Question, Answer> where Question: Hashable {
 
 @available(*, deprecated)
 public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
-    let flow = Flow(questions: questions, delegate: QuizDelegateAdapter(router: router), scoring: scoring(correctAnswers: correctAnswers))
+    let flow = Flow(questions: questions, delegate: QuizDelegateAdapter(router: router, correctAnswers), scoring: scoring(correctAnswers: correctAnswers))
     flow.start()
     return flow
 }
@@ -37,19 +37,30 @@ func scoring<Question, Answer: Equatable>(correctAnswers: [Question: Answer]) ->
 }
 
 @available(*, deprecated)
-private class QuizDelegateAdapter<R: Router>: QuizDelegate {
+private class QuizDelegateAdapter<R: Router>: QuizDelegate where R.Answer: Equatable {
   
     private var router: R
+    private var correctAnswers: [R.Question: R.Answer]
     
-    init(router: R) {
+    init(router: R, _ correctAnswers:  [R.Question: R.Answer]) {
         self.router = router
+        self.correctAnswers = correctAnswers
     }
     
     func answer(for question: R.Question, completion:@escaping (R.Answer) -> Void) {
         router.routeTo(question: question, answerCallback: completion)
     }
     
-    func handle(result: Result<R.Question, R.Answer>) {
+    func didCompleteQuiz(with answers: [(question: R.Question, answer: R.Answer)]) {
+        let answers: [Question: Answer] = answers.reduce([:]) { partialResult, answer in
+            var partialResult =  partialResult
+            partialResult[answer.question] = answer.answer
+            return partialResult
+        }
+        let score = scoring(correctAnswers: correctAnswers)(answers)
+        let result = Result(answers: answers, score: score)
         router.routeTo(result: result)
     }
+    
+    func handle(result: Result<R.Question, R.Answer>) {}
 }
