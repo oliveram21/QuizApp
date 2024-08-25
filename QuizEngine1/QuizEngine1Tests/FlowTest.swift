@@ -66,36 +66,38 @@ class FlowTest: XCTestCase {
         
         XCTAssertEqual(delegate.handledQuestions, ["Q1"])
     }
-    func test_start_withNoQuestion_delegateResultHandling() {
+    func test_start_withNoQuestion_completeWithEmptyQuiz() {
       
         makeSut(questions: []).start()
-        XCTAssertEqual(delegate.handledResult!.answers, [:])
+        XCTAssertEqual(delegate.completedQuizes.count,1)
+        XCTAssertTrue(delegate.completedQuizes[0].isEmpty)
     }
-    func test_start_withOneQuestion_doesDelegateResultHandling() {
+    func test_start_withOneQuestion_doesNotCompleteQuiz() {
       
         let sut = makeSut(questions: ["Q1"])
         sut.start()
-        XCTAssertNil(delegate.handledResult)
+        XCTAssertEqual(delegate.completedQuizes.count,0)
     }
-    func test_start_withOneQuestion_delegateResultHandling() {
+    func test_start_withOneQuestion_completeQuiz() {
       
         let sut = makeSut(questions: ["Q1"])
         sut.start()
         delegate.answerCallback("A1")
-        XCTAssertEqual(delegate.handledResult!.answers, ["Q1":"A1"])
+        assertEqual(delegate.completedQuizes[0], [("Q1","A1")])
     }
-    func test_startAndAsnwerFirst_withTwoQuestions_doesNotDelegateToResultHandling() {
+    
+    func test_startAndAsnwerFirst_withTwoQuestions_doesNotCompleteQuiz() {
         let sut = makeSut(questions: ["Q1","Q2"])
         sut.start()
         delegate.answerCallback("A1")
-        XCTAssertNil(delegate.handledResult)
+        XCTAssertTrue(delegate.completedQuizes.isEmpty)
     }
-    func test_startAndAsnwerFirstAndSecond_withTwoQuestions_handleResult() {
+    func test_startAndAsnwerFirstAndSecond_withTwoQuestions_completesQuiz() {
         let sut = makeSut(questions: ["Q1","Q2"])
         sut.start()
         delegate.answerCallback("A1")
         delegate.answerCallback("A2")
-        XCTAssertEqual(delegate.handledResult!.answers, ["Q1":"A1","Q2":"A2"])
+        assertEqual(delegate.completedQuizes[0], [("Q1","A1"),("Q2","A2")])
     }
     func test_startAndAsnwerFirstAndSecond_withTwoQuestions_scores() {
         var result: [String: String] = [:]
@@ -115,8 +117,13 @@ class FlowTest: XCTestCase {
         return Flow(questions: questions, delegate: delegate, scoring: scoring)
     }
     
+    func assertEqual(_ a1: [(String, String)], _ a2: [(String, String)], file: StaticString = #file,line: UInt = #line) {
+        XCTAssertEqual(a1.elementsEqual(a2, by: ==), true, file: file, line: line)
+    }
+    
     private class DelegateSpy: QuizDelegate {
         var handledQuestions: [String] = []
+        var completedQuizes: [[(question: Question, answer: Answer)]] = []
         var handledResult: Result<String, String>?
         var answerCallback: ((String) -> Void) = {_ in}
         
@@ -125,6 +132,9 @@ class FlowTest: XCTestCase {
             self.answerCallback = completion
         }
         
+        func didCompleteQuiz(with answers: [(question: Question, answer:Answer)]) {
+            completedQuizes.append(answers)
+        }
         func handle(result: QuizEngine1.Result<String, String>) {
             handledResult = result
         }

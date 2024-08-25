@@ -10,6 +10,7 @@ import Foundation
 class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == Answer, Delegate.Question == Question {
     private let delegate: Delegate
     private let questions: [Question]
+    private var newAnswers: [(Question, Answer)] = []
     private var answers: [Question: Answer] = [:]
     private let scoring: ([Question: Answer]) -> Int
     
@@ -27,11 +28,13 @@ class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == An
             let question = questions[index]
             delegate.answer(for: question, completion: answer(for: question, at: index))
         } else {
+            delegate.didCompleteQuiz(with: newAnswers)
             delegate.handle(result: createResult())
         }
     }
     private func answer(for question: Question, at index: Int) -> (Answer) -> Void {
         return { [weak self] answer in
+            self?.newAnswers.append((question, answer))
             self?.answers[question] = answer
             self?.delegateQuestionHandling(after: index)
         }
