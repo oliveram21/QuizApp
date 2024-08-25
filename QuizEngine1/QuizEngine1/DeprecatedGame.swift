@@ -28,14 +28,6 @@ public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Ques
     return flow
 }
 
-func scoring<Question, Answer: Equatable>(correctAnswers: [Question: Answer]) -> ([Question: Answer]) -> Int {
-    return { answers in
-        return correctAnswers.reduce(0) { score, tuple in
-            return score + (answers[tuple.key] == tuple.value ? 1 : 0)
-        }
-    }
-}
-
 @available(*, deprecated)
 private class QuizDelegateAdapter<R: Router>: QuizDelegate where R.Answer: Equatable {
   
@@ -63,4 +55,12 @@ private class QuizDelegateAdapter<R: Router>: QuizDelegate where R.Answer: Equat
     }
     
     func handle(result: Result<R.Question, R.Answer>) {}
+    
+    private func scoring(correctAnswers: [R.Question: R.Answer]) -> ([R.Question: R.Answer]) -> Int {
+        return { answers in
+            return correctAnswers.reduce(0) { score, tuple in
+                return score + (answers[tuple.key] == tuple.value ? 1 : 0)
+            }
+        }
+    }
 }

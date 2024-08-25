@@ -24,6 +24,7 @@ class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == An
     func start() {
         delegateQuestionHandling(at: questions.startIndex)
     }
+    
     private func delegateQuestionHandling(at index: Int) {
         if index < questions.endIndex {
             let question = questions[index]
