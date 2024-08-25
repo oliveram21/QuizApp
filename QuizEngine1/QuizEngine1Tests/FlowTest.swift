@@ -15,29 +15,29 @@ class FlowTest: XCTestCase {
     func test_start_withNoQuestion_doesNotDelegateQuestionHandling() {
       
         makeSut(questions: []).start()
-        XCTAssertTrue(delegate.handledQuestions.isEmpty)
+        XCTAssertTrue(delegate.questionsAsked.isEmpty)
     }
     
     func test_start_withOneQuestion_delegateQuestionHandling() {
         makeSut(questions: ["Q1"]).start()
-        XCTAssertEqual(delegate.handledQuestions, ["Q1"])
+        XCTAssertEqual(delegate.questionsAsked, ["Q1"])
     }
     func test_start_withOneQuestion_delegateCorrectQuestionHandling() {
        
         makeSut(questions: ["Q2"]).start()
-        XCTAssertEqual(delegate.handledQuestions, ["Q2"])
+        XCTAssertEqual(delegate.questionsAsked, ["Q2"])
     }
     func test_start_withTwoQuestion_delegateCorrectQuestionHandling() {
        let sut = makeSut(questions: ["Q1","Q2"])
         sut.start()
-        XCTAssertEqual(delegate.handledQuestions, ["Q1"])
+        XCTAssertEqual(delegate.questionsAsked, ["Q1"])
     }
     func test_startTwice_withTwoQuestion_delegateCorrectQuestionHandling() {
       
         let sut = makeSut(questions: ["Q1","Q2"])
         sut.start()
         sut.start()
-        XCTAssertEqual(delegate.handledQuestions, ["Q1","Q1"])
+        XCTAssertEqual(delegate.questionsAsked, ["Q1","Q1"])
     }
     
     func test_startAndAnswer_withTwoQuestion_delegateSecondQuestionHandling() {
@@ -46,7 +46,7 @@ class FlowTest: XCTestCase {
             sut.start()
         delegate.answerCallback("A1")
         
-        XCTAssertEqual(delegate.handledQuestions, ["Q1","Q2"])
+        XCTAssertEqual(delegate.questionsAsked, ["Q1","Q2"])
     }
     func test_startAndAnswerFirstAndSecondQuestions_withThreeQuestions_delegateSecondQuestionAndThirdHandling() {
        
@@ -55,7 +55,7 @@ class FlowTest: XCTestCase {
         delegate.answerCallback("A1")
         delegate.answerCallback("A2")
         
-        XCTAssertEqual(delegate.handledQuestions, ["Q1","Q2","Q3"])
+        XCTAssertEqual(delegate.questionsAsked, ["Q1","Q2","Q3"])
     }
     func test_startAndAnswerFirstQuestion_withOneQuestion_doesDelegateNextQuestionHandling() {
        
@@ -64,7 +64,7 @@ class FlowTest: XCTestCase {
         delegate.answerCallback("A1")
         delegate.answerCallback("A2")
         
-        XCTAssertEqual(delegate.handledQuestions, ["Q1"])
+        XCTAssertEqual(delegate.questionsAsked, ["Q1"])
     }
     func test_start_withNoQuestion_completeWithEmptyQuiz() {
       
@@ -122,13 +122,13 @@ class FlowTest: XCTestCase {
     }
     
     private class DelegateSpy: QuizDelegate {
-        var handledQuestions: [String] = []
+        var questionsAsked: [String] = []
         var completedQuizes: [[(question: Question, answer: Answer)]] = []
         var handledResult: Result<String, String>?
         var answerCallback: ((String) -> Void) = {_ in}
         
         func answer(for question: String, completion: @escaping (String) -> Void) {
-            handledQuestions.append(question)
+            questionsAsked.append(question)
             self.answerCallback = completion
         }
         
