@@ -12,7 +12,6 @@
 		843C3A922C6BC74500809CE2 /* QuizEngine1.h in Headers */ = {isa = PBXBuildFile; fileRef = 843C3A842C6BC74500809CE2 /* QuizEngine1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		843C3A9C2C6BC76100809CE2 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3A9B2C6BC76100809CE2 /* Flow.swift */; };
 		843C3A9E2C6BC76A00809CE2 /* FlowTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3A9D2C6BC76A00809CE2 /* FlowTest.swift */; };
-		843C3B362C70B5AD00809CE2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B352C70B5AD00809CE2 /* Result.swift */; };
 		843C3B3A2C70B77A00809CE2 /* DeprecatedGameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B392C70B77A00809CE2 /* DeprecatedGameTest.swift */; };
 		843C3B3E2C70B9D900809CE2 /* DeprecatedGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3B3D2C70B9D900809CE2 /* DeprecatedGame.swift */; };
 		843C3C0C2C764CAE00809CE2 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3C0B2C764CAE00809CE2 /* Question.swift */; };
@@ -20,6 +19,8 @@
 		84759E252C78E1B600B5E036 /* QuizDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E242C78E1B600B5E036 /* QuizDelegate.swift */; };
 		84759E272C78E24F00B5E036 /* QuizTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E262C78E24F00B5E036 /* QuizTest.swift */; };
 		84759E292C78E90E00B5E036 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E282C78E90E00B5E036 /* Quiz.swift */; };
+		84759E2C2C7C452A00B5E036 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E2B2C7C452A00B5E036 /* Assertions.swift */; };
+		84759E2E2C7C45D500B5E036 /* QuizDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E2D2C7C45D500B5E036 /* QuizDelegateSpy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,6 @@
 		843C3A8B2C6BC74500809CE2 /* QuizEngine1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizEngine1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		843C3A9B2C6BC76100809CE2 /* Flow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
 		843C3A9D2C6BC76A00809CE2 /* FlowTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowTest.swift; sourceTree = "<group>"; };
-		843C3B352C70B5AD00809CE2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		843C3B392C70B77A00809CE2 /* DeprecatedGameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedGameTest.swift; sourceTree = "<group>"; };
 		843C3B3D2C70B9D900809CE2 /* DeprecatedGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedGame.swift; sourceTree = "<group>"; };
 		843C3C0B2C764CAE00809CE2 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		84759E242C78E1B600B5E036 /* QuizDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDelegate.swift; sourceTree = "<group>"; };
 		84759E262C78E24F00B5E036 /* QuizTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTest.swift; sourceTree = "<group>"; };
 		84759E282C78E90E00B5E036 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		84759E2B2C7C452A00B5E036 /* Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
+		84759E2D2C7C45D500B5E036 /* QuizDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDelegateSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +93,6 @@
 			children = (
 				843C3A842C6BC74500809CE2 /* QuizEngine1.h */,
 				843C3A9B2C6BC76100809CE2 /* Flow.swift */,
-				843C3B352C70B5AD00809CE2 /* Result.swift */,
 				843C3C0B2C764CAE00809CE2 /* Question.swift */,
 				843C3B3D2C70B9D900809CE2 /* DeprecatedGame.swift */,
 				843C3A852C6BC74500809CE2 /* QuizEngine1.docc */,
@@ -108,6 +109,8 @@
 				843C3B392C70B77A00809CE2 /* DeprecatedGameTest.swift */,
 				843C3C1A2C7686CA00809CE2 /* QuestionTests.swift */,
 				84759E262C78E24F00B5E036 /* QuizTest.swift */,
+				84759E2B2C7C452A00B5E036 /* Assertions.swift */,
+				84759E2D2C7C45D500B5E036 /* QuizDelegateSpy.swift */,
 			);
 			path = QuizEngine1Tests;
 			sourceTree = "<group>";
@@ -224,7 +227,6 @@
 				843C3B3E2C70B9D900809CE2 /* DeprecatedGame.swift in Sources */,
 				84759E252C78E1B600B5E036 /* QuizDelegate.swift in Sources */,
 				84759E292C78E90E00B5E036 /* Quiz.swift in Sources */,
-				843C3B362C70B5AD00809CE2 /* Result.swift in Sources */,
 				843C3C0C2C764CAE00809CE2 /* Question.swift in Sources */,
 				843C3A862C6BC74500809CE2 /* QuizEngine1.docc in Sources */,
 				843C3A9C2C6BC76100809CE2 /* Flow.swift in Sources */,
@@ -235,9 +237,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84759E2E2C7C45D500B5E036 /* QuizDelegateSpy.swift in Sources */,
 				843C3A9E2C6BC76A00809CE2 /* FlowTest.swift in Sources */,
 				843C3C1B2C7686CA00809CE2 /* QuestionTests.swift in Sources */,
 				84759E272C78E24F00B5E036 /* QuizTest.swift in Sources */,
+				84759E2C2C7C452A00B5E036 /* Assertions.swift in Sources */,
 				843C3B3A2C70B77A00809CE2 /* DeprecatedGameTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
