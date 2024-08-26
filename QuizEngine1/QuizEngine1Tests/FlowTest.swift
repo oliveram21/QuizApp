@@ -44,7 +44,7 @@ class FlowTest: XCTestCase {
        
        let sut = makeSut(questions: ["Q1","Q2"])
             sut.start()
-        delegate.answerCallback("A1")
+        delegate.answerCallback[0]("A1")
         
         XCTAssertEqual(delegate.questionsAsked, ["Q1","Q2"])
     }
@@ -52,8 +52,8 @@ class FlowTest: XCTestCase {
        
         let sut = makeSut(questions: ["Q1","Q2","Q3"])
         sut.start()
-        delegate.answerCallback("A1")
-        delegate.answerCallback("A2")
+        delegate.answerCallback[0]("A1")
+        delegate.answerCallback[1]("A2")
         
         XCTAssertEqual(delegate.questionsAsked, ["Q1","Q2","Q3"])
     }
@@ -61,8 +61,8 @@ class FlowTest: XCTestCase {
        
         let sut = makeSut(questions: ["Q1"])
         sut.start()
-        delegate.answerCallback("A1")
-        delegate.answerCallback("A2")
+        delegate.answerCallback[0]("A1")
+        delegate.answerCallback[0]("A2")
         
         XCTAssertEqual(delegate.questionsAsked, ["Q1"])
     }
@@ -82,24 +82,33 @@ class FlowTest: XCTestCase {
       
         let sut = makeSut(questions: ["Q1"])
         sut.start()
-        delegate.answerCallback("A1")
+        delegate.answerCallback[0]("A1")
         assertEqual(delegate.completedQuizes[0], [("Q1","A1")])
     }
     
     func test_startAndAsnwerFirst_withTwoQuestions_doesNotCompleteQuiz() {
         let sut = makeSut(questions: ["Q1","Q2"])
         sut.start()
-        delegate.answerCallback("A1")
+        delegate.answerCallback[0]("A1")
         XCTAssertTrue(delegate.completedQuizes.isEmpty)
     }
     func test_startAndAsnwerFirstAndSecond_withTwoQuestions_completesQuiz() {
         let sut = makeSut(questions: ["Q1","Q2"])
         sut.start()
-        delegate.answerCallback("A1")
-        delegate.answerCallback("A2")
+        delegate.answerCallback[0]("A1")
+        delegate.answerCallback[1]("A2")
         assertEqual(delegate.completedQuizes[0], [("Q1","A1"),("Q2","A2")])
     }
-    
+    func test_startAndAsnwerFirstAndSecondTwice_withTwoQuestions_completesQuizTwice() {
+        let sut = makeSut(questions: ["Q1","Q2"])
+        sut.start()
+        delegate.answerCallback[0]("A1")
+        delegate.answerCallback[1]("A2")
+        
+        delegate.answerCallback[0]("A1-1")
+        delegate.answerCallback[1]("A2-2")
+        assertEqual(delegate.completedQuizes[1], [("Q1","A1"),("Q2","A2")])
+    }
     //MARK: Helpers
     private func makeSut(questions: [String]) -> Flow<String, String, DelegateSpy> {
         return Flow(questions: questions, delegate: delegate)
@@ -113,11 +122,11 @@ class FlowTest: XCTestCase {
         var questionsAsked: [String] = []
         var completedQuizes: [[(question: Question, answer: Answer)]] = []
         var handledResult: Result<String, String>?
-        var answerCallback: ((String) -> Void) = {_ in}
+        var answerCallback: [((String) -> Void)] = []
         
         func answer(for question: String, completion: @escaping (String) -> Void) {
             questionsAsked.append(question)
-            self.answerCallback = completion
+            self.answerCallback.append(completion)
         }
         
         func didCompleteQuiz(with answers: [(question: Question, answer:Answer)]) {
