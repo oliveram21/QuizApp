@@ -8,7 +8,7 @@
 import Foundation
 
 import XCTest
-@testable import QuizEngine1
+import QuizEngine1
 
 final class QuizTest: XCTestCase {
     private let delegate = DelegateSpy()
