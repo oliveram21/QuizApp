@@ -36,7 +36,7 @@ class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == An
     }
     private func answer(for question: Question, at index: Int) -> (Answer) -> Void {
         return { [weak self] answer in
-            self?.newAnswers.append((question, answer))
+            self?.newAnswers.replaceOrInsert((question, answer), at: index)
             self?.answers[question] = answer
             self?.delegateQuestionHandling(after: index)
         }
@@ -47,5 +47,14 @@ class Flow<Question, Answer, Delegate: QuizDelegate> where Delegate.Answer == An
    
     private func createResult() -> Result<Question, Answer> {
         return Result(answers: answers, score: scoring(answers))
+    }
+}
+
+extension Array {
+    mutating func  replaceOrInsert(_ element: Element, at index: Int) {
+        if index < self.endIndex {
+            self.remove(at: index)
+        }
+        self.insert(element, at: index)
     }
 }
