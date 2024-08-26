@@ -33,13 +33,9 @@ class ScoreTests: XCTestCase {
     }
     class BasicScore {
         static func score(for answers: [String], correctAnswers: [String]) -> Int {
-            var score = 0
-            for (index, answer) in answers.enumerated() {
-                if index < correctAnswers.endIndex {
-                    score += (answer == correctAnswers[index]) ? 1 : 0
-                }
+            return zip(answers, correctAnswers).reduce(0) {score, tuple in
+                return score + (tuple.0 == tuple.1 ? 1 : 0)
             }
-            return score
         }
     }
 }
