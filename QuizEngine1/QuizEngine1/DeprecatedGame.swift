@@ -18,7 +18,7 @@ public struct Result<Question: Hashable, Answer> {
     public let score: Int
 }
 
-@available(*, deprecated)
+@available(*, deprecated, message: "Use QuizDelegate instead")
 public protocol Router<Question, Answer> where Question: Hashable {
     associatedtype Question
     associatedtype Answer
@@ -27,14 +27,14 @@ public protocol Router<Question, Answer> where Question: Hashable {
     func routeTo(result: Result<Question, Answer>)
 }
 
-@available(*, deprecated)
+@available(*, deprecated, message: "Use Quiz.start instead")
 public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
     let flow = Flow(questions: questions, delegate: QuizDelegateAdapter(router: router, correctAnswers))
     flow.start()
     return flow
 }
 
-@available(*, deprecated)
+@available(*, deprecated, message: "Remove alongside deperecated Game types")
 private class QuizDelegateAdapter<R: Router>: QuizDelegate where R.Answer: Equatable {
   
     private var router: R
