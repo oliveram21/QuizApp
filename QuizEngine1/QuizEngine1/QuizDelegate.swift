@@ -13,14 +13,4 @@ public protocol QuizDelegate <Question, Answer> where Question: Hashable {
     
     func answer(for question: Question, completion:@escaping (Answer) -> Void)
     func didCompleteQuiz(with answers: [(question: Question, answer: Answer)])
-    
-    @available(*, deprecated, message: "use didCompleteQuiz(wit answers)")
-    func handle(result: Result<Question, Answer>)
-
-}
-
-public extension QuizDelegate {
-    func didCompleteQuiz(with answers: [(question: Question, answer: Answer)]) {
-        
-    }
 }

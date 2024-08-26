@@ -107,7 +107,7 @@ class FlowTest: XCTestCase {
         
         delegate.answerCallback[0]("A1-1")
         delegate.answerCallback[1]("A2-2")
-        assertEqual(delegate.completedQuizes[1], [("Q1","A1"),("Q2","A2")])
+        assertEqual(delegate.completedQuizes[1], [("Q1","A1-1"),("Q2","A2-2")])
     }
     //MARK: Helpers
     private func makeSut(questions: [String]) -> Flow<String, String, DelegateSpy> {
@@ -121,7 +121,7 @@ class FlowTest: XCTestCase {
     private class DelegateSpy: QuizDelegate {
         var questionsAsked: [String] = []
         var completedQuizes: [[(question: Question, answer: Answer)]] = []
-        var handledResult: Result<String, String>?
+       
         var answerCallback: [((String) -> Void)] = []
         
         func answer(for question: String, completion: @escaping (String) -> Void) {
@@ -131,9 +131,6 @@ class FlowTest: XCTestCase {
         
         func didCompleteQuiz(with answers: [(question: Question, answer:Answer)]) {
             completedQuizes.append(answers)
-        }
-        func handle(result: QuizEngine1.Result<String, String>) {
-            handledResult = result
         }
     }
 }
