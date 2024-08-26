@@ -13,6 +13,12 @@ extension Flow: Game {
 }
 
 @available(*, deprecated)
+public struct Result<Question: Hashable, Answer> {
+    public let answers: [Question: Answer]
+    public let score: Int
+}
+
+@available(*, deprecated)
 public protocol Router<Question, Answer> where Question: Hashable {
     associatedtype Question
     associatedtype Answer
