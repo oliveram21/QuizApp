@@ -10,16 +10,12 @@ import XCTest
 import QuizEngine1
 
 class ResultsPresenterTests: XCTestCase {
-    let userCorrectAnswers = [Question.singleAnswer("Q1"): ["A1"], Question.multipleAnswers("Q2"): ["A1", "A2"]]
-    let userWrongAnswers = [Question.singleAnswer("Q1"): ["A2"], Question.multipleAnswers("Q2"): ["A1", "A3"]]
-    let correctAnswers = [Question.singleAnswer("Q1"): ["A1"], Question.multipleAnswers("Q2"): ["A1", "A2"]]
-    let questions = [Question.singleAnswer("Q1"), Question.multipleAnswers("Q2")]
-    
+   
     func test_title_returnFormattedTitle() {
         XCTAssertEqual( makeSut(userWrongAnswers, correctAnswers: correctAnswers).title, "Results")
     }
     func test_summary_withTwoQuestionsAndScoreZero_returnsSummary() {
-        let sut = makeSut(userWrongAnswers, correctAnswers: correctAnswers)
+        let sut = makeSut(userWrongAnswers, correctAnswers: correctAnswers, score: 0)
         XCTAssertEqual(sut.summary, "You have scored 0 out of 2")
     }
     
@@ -54,9 +50,17 @@ class ResultsPresenterTests: XCTestCase {
         XCTAssertEqual(sut.answers.last!.answer,"A1\nA2")
     }
     //MARK: helpers
-    func makeSut(_ userAnswers: [Question<String>: [String]], correctAnswers: [Question<String>: [String]], score: Int = 0) -> ResultsPresenter {
+    let userCorrectAnswers = [(Question.singleAnswer("Q1"),["A1"]), (Question.multipleAnswers("Q2"), ["A1", "A2"])]
+    let userWrongAnswers = [(Question.singleAnswer("Q1"), ["A2"]), (Question.multipleAnswers("Q2"), ["A1", "A3"])]
+    let correctAnswers = [(Question.singleAnswer("Q1"), ["A1"]), (Question.multipleAnswers("Q2"), ["A1", "A2"])]
+    let questions = [Question.singleAnswer("Q1"), Question.multipleAnswers("Q2")]
+    
+    
+    func makeSut(_ userAnswers: ResultsPresenter.QuestionAnswers,
+                 correctAnswers: ResultsPresenter.QuestionAnswers,
+                 score: Int = 0) -> ResultsPresenter {
         
-        let result = Result.make(answers: userAnswers, score: score)
-        return ResultsPresenter(result: result, correctAnswers: correctAnswers, questions: questions)
+       // let result = Result.make(answers: userAnswers, score: score)
+        return ResultsPresenter(userAnswers: userAnswers, correctAnswers: correctAnswers, scorer: {_, _ in return score})
     }
 }

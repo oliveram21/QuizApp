@@ -7,12 +7,18 @@
 
 import QuizEngine1
 
-struct ResultsPresenter {
+final class ResultsPresenter {
     typealias QuestionAnswers = [(question: Question<String>, answers: [String])]
     typealias Scorer = ([String], [String]) -> Int
     let userAnswers: QuestionAnswers
     let correctAnswers: QuestionAnswers
     let scorer: Scorer
+    
+    init(userAnswers: QuestionAnswers, correctAnswers: QuestionAnswers, scorer: @escaping Scorer) {
+        self.userAnswers = userAnswers
+        self.correctAnswers = correctAnswers
+        self.scorer = scorer
+    }
     
     init(result: Result<Question<String>, [String]>, correctAnswers: [Question<String> : [String]], questions: [Question<String>]) {
         self.userAnswers = questions.map({ (question: $0, answers: result.answers[$0]!) })
