@@ -8,23 +8,32 @@
 import QuizEngine1
 
 struct ResultsPresenter {
-    let result:  Result<Question<String>, [String]>
-    let correctAnswers: [Question<String>: [String]]
-    let questions: [Question<String>]
+    typealias QuestionAnswers = [(question: Question<String>, answers: [String])]
+    typealias Scorer = ([String], [String]) -> Int
+    let userAnswers: QuestionAnswers
+    let correctAnswers: QuestionAnswers
+    let scorer: Scorer
+    
+    init(result: Result<Question<String>, [String]>, correctAnswers: [Question<String> : [String]], questions: [Question<String>]) {
+        self.userAnswers = questions.map({ (question: $0, answers: result.answers[$0]!) })
+        self.correctAnswers = questions.map({ (question: $0, answers: correctAnswers[$0]!) })
+        self.scorer = {_, _ in result.score}//BasicScore.score
+    }
     var summary: String {
-        return "You have scored \(result.score) out of \(result.answers.count)"
+        return "You have scored \(score) out of \(userAnswers.count)"
     }
     var title: String {
         return "Results"
     }
+    
+    var score: Int {
+        return scorer(userAnswers.flatMap({ $0.answers}), correctAnswers.flatMap({ $0.answers}))//(for: userAnswers.flatMap({ $0.answers}), correctAnswers: correctAnswers.flatMap({ $0.answers}))
+    }
+    
     var answers: [PresentableAnswer] {
-        return questions.map { question in
-            guard let answers = result.answers[question],
-                  let correctAnswers = correctAnswers[question] else {
-                fatalError("Missing answers for question:\(question)")
-            }
-            let correctAnswer = correctAnswers == answers ? nil : correctAnswers
-            return presentableAnswer(question, answers, correctAnswer)
+        return zip(userAnswers, correctAnswers).map { (questionAnswers, questionCorrectAnswers) in
+            let correctAnswer = questionCorrectAnswers.answers == questionAnswers.answers ? nil : questionCorrectAnswers.answers
+            return presentableAnswer(questionAnswers.question, questionAnswers.answers, correctAnswer)
         }
     }
     

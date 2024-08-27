@@ -20,7 +20,7 @@ class ResultsPresenterTests: XCTestCase {
     }
     func test_summary_withTwoQuestionsAndScoreZero_returnsSummary() {
         let sut = makeSut(userWrongAnswers, correctAnswers: correctAnswers)
-        XCTAssertTrue(sut.summary == "You have scored 0 out of 2")
+        XCTAssertEqual(sut.summary, "You have scored 0 out of 2")
     }
     
     func test_answers_withWrongSingleAnswer_mapAnswers() {
