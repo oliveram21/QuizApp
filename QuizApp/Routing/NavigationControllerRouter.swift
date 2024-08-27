@@ -9,7 +9,7 @@ import Foundation
 import QuizEngine1
 import UIKit
 
-class NavigationControllerRouter: QuizDelegate {
+final class NavigationControllerRouter: QuizDelegate {
     private let navigationController: UINavigationController
     private let viewControllerFactory: ViewControllerFactory
     
@@ -21,7 +21,7 @@ class NavigationControllerRouter: QuizDelegate {
     private func show(_ viewController: UIViewController) {
         self.navigationController.pushViewController(viewController, animated: true)
     }
-    func answer(for question: QuizEngine1.Question<String>, completion: @escaping ([String]) -> Void) {
+    func answer(for question: Question<String>, completion: @escaping ([String]) -> Void) {
         switch question {
         case .singleAnswer(_):
             show(viewControllerFactory.questionViewController(question: question, answerCallback: completion))
@@ -39,7 +39,7 @@ class NavigationControllerRouter: QuizDelegate {
         }
     }
     
-    func didCompleteQuiz(with answers: [(question: QuizEngine1.Question<String>, answer: [String])]) {
+    func didCompleteQuiz(with answers: [(question: Question<String>, answer: [String])]) {
         show(viewControllerFactory.resultViewController(for: answers))
     }
 }
