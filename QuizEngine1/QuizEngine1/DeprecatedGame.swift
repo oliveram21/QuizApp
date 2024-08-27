@@ -9,10 +9,10 @@ import Foundation
 
 public protocol Game {
 }
-extension Flow: Game {
+extension Quiz: Game {
 }
 
-@available(*, deprecated)
+@available(*, deprecated, message:"Scoring won't be supported in the future")
 public struct Result<Question: Hashable, Answer> {
     public let answers: [Question: Answer]
     public let score: Int
@@ -29,9 +29,9 @@ public protocol Router<Question, Answer> where Question: Hashable {
 
 @available(*, deprecated, message: "Use Quiz.start instead")
 public func startGame<Question, Answer: Equatable, R: Router>(_ questions: [Question], router: R, correctAnswers: [Question: Answer])  -> some Game where R.Answer == Answer, R.Question == Question {
-    let flow = Flow(questions: questions, delegate: QuizDelegateAdapter(router: router, correctAnswers))
-    flow.start()
-    return flow
+    let adapter = QuizDelegateAdapter(router: router, correctAnswers)
+    let quiz = Quiz.start(questions, delegate: adapter)
+    return quiz
 }
 
 @available(*, deprecated, message: "Remove alongside deperecated Game types")

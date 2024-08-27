@@ -13,7 +13,7 @@ public final class Quiz {
         self.flow = flow
     }
     
-    static public func start<Delegate: QuizDelegate>(_ questions: [Delegate.Question], delegate: Delegate)  -> Quiz where Delegate.Answer: Hashable {
+    static public func start<Delegate: QuizDelegate>(_ questions: [Delegate.Question], delegate: Delegate)  -> Quiz {
         let flow = Flow(questions: questions, delegate: delegate)
         flow.start()
         return Quiz(flow: flow)
