@@ -14,12 +14,13 @@ struct iOSViewControllerFactory: ViewControllerFactory {
     
     private var options: [Question<String>:[String]]
     private var correctAnswers: Answers
-    private var questions: [Question<String>]
+    private var questions: [Question<String>] {
+        return correctAnswers.map({ $0.question })
+    }
     
     init(options: [Question<String>:[String]], correctAnswers: Answers) {
         self.correctAnswers = correctAnswers
         self.options = options
-        self.questions = correctAnswers.map({ $0.question })
     }
 
     func questionViewController(question: Question<String>, answerCallback: @escaping ([String]) -> Void) -> UIViewController {
