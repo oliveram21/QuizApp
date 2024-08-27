@@ -21,7 +21,6 @@
 		84759E292C78E90E00B5E036 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E282C78E90E00B5E036 /* Quiz.swift */; };
 		84759E2C2C7C452A00B5E036 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E2B2C7C452A00B5E036 /* Assertions.swift */; };
 		84759E2E2C7C45D500B5E036 /* QuizDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E2D2C7C45D500B5E036 /* QuizDelegateSpy.swift */; };
-		84759E302C7C4AB800B5E036 /* ScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84759E2F2C7C4AB800B5E036 /* ScoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		84759E282C78E90E00B5E036 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		84759E2B2C7C452A00B5E036 /* Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		84759E2D2C7C45D500B5E036 /* QuizDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDelegateSpy.swift; sourceTree = "<group>"; };
-		84759E2F2C7C4AB800B5E036 /* ScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +111,6 @@
 				84759E262C78E24F00B5E036 /* QuizTest.swift */,
 				84759E2B2C7C452A00B5E036 /* Assertions.swift */,
 				84759E2D2C7C45D500B5E036 /* QuizDelegateSpy.swift */,
-				84759E2F2C7C4AB800B5E036 /* ScoreTests.swift */,
 			);
 			path = QuizEngine1Tests;
 			sourceTree = "<group>";
@@ -242,7 +239,6 @@
 			files = (
 				84759E2E2C7C45D500B5E036 /* QuizDelegateSpy.swift in Sources */,
 				843C3A9E2C6BC76A00809CE2 /* FlowTest.swift in Sources */,
-				84759E302C7C4AB800B5E036 /* ScoreTests.swift in Sources */,
 				843C3C1B2C7686CA00809CE2 /* QuestionTests.swift in Sources */,
 				84759E272C78E24F00B5E036 /* QuizTest.swift in Sources */,
 				84759E2C2C7C452A00B5E036 /* Assertions.swift in Sources */,
