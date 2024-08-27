@@ -11,7 +11,7 @@ import QuizEngine1
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var quizGame: Game!
+    var quiz: Quiz!
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -25,20 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let questions = [question, question2]
         let options = [question: ["A game", "Learning project", "Quiz game"],
                        question2: ["Layered", "Event Sourcing", "MVC"]]
-        let correctAnswers = [question: ["Learning project"],
-                              question2: ["Layered", "MVC"]]
-        let correctAnswersNew = [question: ["Learning project"],
-                              question2: ["Layered", "MVC"]]
+        let correctAnswers = [(question, ["Learning project"]),
+                              (question2, ["Layered", "MVC"])]
         let navigationController = UINavigationController()
         let viewControllersFactory =
         iOSViewControllerFactory(options: options, 
-                                 correctAnswers: [(question, ["Learning project"]),
-                                                  (question2, ["Layered", "MVC"])])
+                                 correctAnswers: correctAnswers)
         
         let router = NavigationControllerRouter(navigationController: navigationController, factory: viewControllersFactory)
-        
-        quizGame = startGame(questions, router: router, correctAnswers: correctAnswers)
-        
+    
+        quiz = Quiz.start(questions, delegate: router)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
