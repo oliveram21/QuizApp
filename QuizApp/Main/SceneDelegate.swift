@@ -27,9 +27,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                        question2: ["Layered", "Event Sourcing", "MVC"]]
         let correctAnswers = [question: ["Learning project"],
                               question2: ["Layered", "MVC"]]
-        
+        let correctAnswersNew = [question: ["Learning project"],
+                              question2: ["Layered", "MVC"]]
         let navigationController = UINavigationController()
-        let viewControllersFactory = iOSViewControllerFactory(options: options, correctAnswers: correctAnswers, questions: questions)
+        let viewControllersFactory =
+        iOSViewControllerFactory(options: options, 
+                                 correctAnswers: [(question, ["Learning project"]),
+                                                  (question2, ["Layered", "MVC"])])
         
         let router = NavigationControllerRouter(navigationController: navigationController, factory: viewControllersFactory)
         

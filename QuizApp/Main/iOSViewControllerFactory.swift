@@ -21,13 +21,7 @@ struct iOSViewControllerFactory: ViewControllerFactory {
         self.options = options
         self.questions = correctAnswers.map({ $0.question })
     }
-    
-    init(options: [Question<String> : [String]], correctAnswers: [Question<String> : [String]], questions: [Question<String>]) {
-        self.options = options
-        self.correctAnswers = questions.map({ (question: $0, answers: correctAnswers[$0]!)})
-        self.questions = questions
-    }
-    
+
     func questionViewController(question: Question<String>, answerCallback: @escaping ([String]) -> Void) -> UIViewController {
        
         switch question {
