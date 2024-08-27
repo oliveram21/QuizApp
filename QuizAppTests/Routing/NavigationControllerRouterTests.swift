@@ -11,11 +11,11 @@ import XCTest
 import QuizEngine1
 
 class NavigationControllerRouterTests: XCTestCase {
-    let navigationController = NoPushAnimationViewController()
-    let factory = ViewControllerFactoryStub()
-    lazy var sut = NavigationControllerRouter(navigationController: navigationController, factory: factory)
-    let singleAnswerQuestion = Question.singleAnswer("Q1")
-    let multipleAnswersQuestion = Question.multipleAnswers("Q1")
+    private let navigationController = NoPushAnimationViewController()
+    private let factory = ViewControllerFactoryStub()
+    private lazy var sut = NavigationControllerRouter(navigationController: navigationController, factory: factory)
+    private let singleAnswerQuestion = Question.singleAnswer("Q1")
+    private let multipleAnswersQuestion = Question.multipleAnswers("Q1")
     
     func test_answerForTwoQuestions_presentQuestionViewController() {
         let firstViewController = UIViewController()
@@ -90,7 +90,7 @@ class NavigationControllerRouterTests: XCTestCase {
         XCTAssertTrue(calledAnswerCallback)
     }
     
-    func test_completeQuiz_presentResultviewController() {
+    func test_didcompleteQuiz_presentResultviewController() {
         let firstViewController = UIViewController()
         factory.stub(resultForQuestions: [multipleAnswersQuestion], with: firstViewController)
         
@@ -106,13 +106,13 @@ class NavigationControllerRouterTests: XCTestCase {
     
 }
 
-class NoPushAnimationViewController: UINavigationController {
+private class NoPushAnimationViewController: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: false)
     }
 }
 
-class ViewControllerFactoryStub: ViewControllerFactory {
+private class ViewControllerFactoryStub: ViewControllerFactory {
     typealias QuestionType = Question<String>
    
     private var stubbedQuestion: [QuestionType: UIViewController] = [:]
