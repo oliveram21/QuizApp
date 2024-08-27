@@ -118,6 +118,9 @@ class ViewControllerFactoryStub: ViewControllerFactory {
     func resultViewController(result: Result<Question<String>, [String]>) -> UIViewController {
         return UIViewController()
     }
+    func resultViewController(for answers: Answers) -> UIViewController {
+        return UIViewController()
+    }
 }
 
 extension UIBarButtonItem {

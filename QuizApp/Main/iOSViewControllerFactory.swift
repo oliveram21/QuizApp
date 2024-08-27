@@ -10,7 +10,7 @@ import UIKit
 import QuizEngine1
 
 struct iOSViewControllerFactory: ViewControllerFactory {
-    typealias Answers = [(question: Question<String>, answers: [String])]
+   
     
     private var options: [Question<String>:[String]]
     private var correctAnswers: Answers
