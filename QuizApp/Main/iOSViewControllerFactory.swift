@@ -46,17 +46,6 @@ struct iOSViewControllerFactory: ViewControllerFactory {
         return resultsVC
     }
     
-    func resultViewController(result: Result<Question<String>, [String]>) -> UIViewController {
-        let presentableResult = ResultsPresenter(
-            userAnswers: questions.map({ (question: $0, answers: result.answers[$0]!) }),
-            correctAnswers: correctAnswers,
-            scorer: {_, _ in result.score})
-       
-        let resultsVC = ResultViewController(summary: presentableResult.summary, answers: presentableResult.answers)
-        resultsVC.title = presentableResult.title
-        return resultsVC
-    }
-    
     private func questionViewController(question: Question<String>, value: String, isMultipleSelection: Bool = false, answerCallback: @escaping ([String]) -> Void) -> QuestionViewController {
         guard let options = options[question] else {
             fatalError("No options for question:\(question)")
