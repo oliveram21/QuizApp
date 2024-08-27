@@ -8,7 +8,7 @@
 import QuizEngine1
 
 final class ResultsPresenter {
-    typealias QuestionAnswers = [(question: Question<String>, answers: [String])]
+    typealias QuestionAnswers = [(question: Question<String>, answer: [String])]
     typealias Scorer = ([String], [String]) -> Int
     let userAnswers: QuestionAnswers
     let correctAnswers: QuestionAnswers
@@ -28,13 +28,13 @@ final class ResultsPresenter {
     }
     
     var score: Int {
-        return scorer(userAnswers.flatMap({ $0.answers}), correctAnswers.flatMap({ $0.answers}))//(for: userAnswers.flatMap({ $0.answers}), correctAnswers: correctAnswers.flatMap({ $0.answers}))
+        return scorer(userAnswers.flatMap({ $0.answer}), correctAnswers.flatMap({ $0.answer}))
     }
     
     var answers: [PresentableAnswer] {
         return zip(userAnswers, correctAnswers).map { (questionAnswers, questionCorrectAnswers) in
-            let correctAnswer = questionCorrectAnswers.answers == questionAnswers.answers ? nil : questionCorrectAnswers.answers
-            return presentableAnswer(questionAnswers.question, questionAnswers.answers, correctAnswer)
+            let correctAnswer = questionCorrectAnswers.answer == questionAnswers.answer ? nil : questionCorrectAnswers.answer
+            return presentableAnswer(questionAnswers.question, questionAnswers.answer, correctAnswer)
         }
     }
     

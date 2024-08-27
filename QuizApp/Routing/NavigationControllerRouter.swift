@@ -48,7 +48,7 @@ class NavigationControllerRouter: Router, QuizDelegate {
     }
     
     func didCompleteQuiz(with answers: [(question: QuizEngine1.Question<String>, answer: [String])]) {
-        show(viewControllerFactory.resultViewController(for: answers.map({($0.question, $0.answer)})))
+        show(viewControllerFactory.resultViewController(for: answers))
     }
 }
 
