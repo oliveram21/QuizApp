@@ -10,9 +10,7 @@ import UIKit
 import QuizEngine1
 
 struct iOSViewControllerFactory: ViewControllerFactory {
-   
-    
-    private var options: [Question<String>:[String]]
+    private var options: [Question<String>: [String]]
     private var correctAnswers: Answers
     private var questions: [Question<String>] {
         return correctAnswers.map({ $0.question })

@@ -9,7 +9,7 @@ import Foundation
 import QuizEngine1
 import UIKit
 
-class NavigationControllerRouter: Router {
+class NavigationControllerRouter: Router, QuizDelegate {
     private let navigationController: UINavigationController
     private let viewControllerFactory: ViewControllerFactory
     
@@ -19,12 +19,23 @@ class NavigationControllerRouter: Router {
     }
     
     func routeTo(question: Question<String>, answerCallback: @escaping ([String]) -> Void) {
+       answer(for: question, completion: answerCallback)
+    }
+    
+    func routeTo(result: Result<Question<String>, [String]>) {
+        didCompleteQuiz(with: result.answers.map({($0.key, $0.value)}))
+    }
+    
+    private func show(_ viewController: UIViewController) {
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+    func answer(for question: QuizEngine1.Question<String>, completion: @escaping ([String]) -> Void) {
         switch question {
         case .singleAnswer(_):
-            show(viewControllerFactory.questionViewController(question: question, answerCallback: answerCallback))
+            show(viewControllerFactory.questionViewController(question: question, answerCallback: completion))
         case .multipleAnswers(_):
             let button = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
-            let buttonController = SubmitButtonController(button, answerCallback)
+            let buttonController = SubmitButtonController(button, completion)
             button.isEnabled = false
             let questionVC = viewControllerFactory.questionViewController(question: question, answerCallback: { selection in
                 buttonController.updateModel(selection)
@@ -36,12 +47,8 @@ class NavigationControllerRouter: Router {
         }
     }
     
-    func routeTo(result: Result<Question<String>, [String]>) {
-        show(viewControllerFactory.resultViewController(result: result))
-    }
-    
-    private func show(_ viewController: UIViewController) {
-        self.navigationController.pushViewController(viewController, animated: true)
+    func didCompleteQuiz(with answers: [(question: QuizEngine1.Question<String>, answer: [String])]) {
+        show(viewControllerFactory.resultViewController(for: answers.map({($0.question, $0.answer)})))
     }
 }
 
