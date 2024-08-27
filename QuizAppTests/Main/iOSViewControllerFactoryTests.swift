@@ -73,9 +73,10 @@ public class iOSViewControllerFactoryTests: XCTestCase {
     }
     
     func test_resultViewController_withResult_createsResultController() {
-        let sut = createSut()
-        let result = Result.make(answers: userCorrectAnswers, score: 0)
-        XCTAssertNotNil(sut.resultViewController(result: result))
+        let sut = makeSut()
+        let answers = [(Question.singleAnswer("Q1"), ["A1"]),
+                          (Question.multipleAnswers("Q2"), ["A2","A3"])]
+        XCTAssertNotNil(sut.resultViewController(for: answers))
     }
     
     func test_resultViewController_withResult_createsControllerWithSummary() {
@@ -93,18 +94,14 @@ public class iOSViewControllerFactoryTests: XCTestCase {
     }
     
     //MARK: Helpers
-    func createSut(options: [Question<String>: [String]] = [Question.singleAnswer("Q1"): ["A1"]]) -> iOSViewControllerFactory {
-        return iOSViewControllerFactory(options: options, 
-                                        correctAnswers: correctAnswers,
-                                        questions: questions)
-    }
-    
+  
     func makeSut(options: [Question<String>: [String]] = [Question.singleAnswer("Q1"): ["A1"]] ) -> iOSViewControllerFactory {
         return iOSViewControllerFactory(options: options,
                                         correctAnswers: correctAnswersNew)
     }
+    
     func createQuestionViewController(question: Question<String>, isMultipleAnswersAllowed: Bool = false, callBack: @escaping ([String]) -> Void = { _ in }) -> QuestionViewController {
-        return createSut(options: [question: questionOptions])
+        return makeSut(options: [question: questionOptions])
             .questionViewController(question: question, answerCallback: callBack) as! QuestionViewController
     }
     
