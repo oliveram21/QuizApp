@@ -20,11 +20,6 @@ final class ResultsPresenter {
         self.scorer = scorer
     }
     
-    init(result: Result<Question<String>, [String]>, correctAnswers: [Question<String> : [String]], questions: [Question<String>]) {
-        self.userAnswers = questions.map({ (question: $0, answers: result.answers[$0]!) })
-        self.correctAnswers = questions.map({ (question: $0, answers: correctAnswers[$0]!) })
-        self.scorer = {_, _ in result.score}//BasicScore.score
-    }
     var summary: String {
         return "You have scored \(score) out of \(userAnswers.count)"
     }
