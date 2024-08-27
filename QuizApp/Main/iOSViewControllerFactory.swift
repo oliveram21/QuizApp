@@ -16,7 +16,7 @@ struct iOSViewControllerFactory: ViewControllerFactory {
     private var correctAnswers: Answers
     private var questions: [Question<String>]
     
-    init(options:  [Question<String>:[String]], correctAnswers: Answers) {
+    init(options: [Question<String>:[String]], correctAnswers: Answers) {
         self.correctAnswers = correctAnswers
         self.options = options
         self.questions = correctAnswers.map({ $0.question })
@@ -40,6 +40,17 @@ struct iOSViewControllerFactory: ViewControllerFactory {
         @unknown default: 
             fatalError("Missing question case")
         }
+    }
+    
+    func resultViewController(for answers: Answers) -> UIViewController {
+        let presentableResult = ResultsPresenter(
+            userAnswers: answers,
+            correctAnswers: correctAnswers,
+            scorer: BasicScore.score)
+       
+        let resultsVC = ResultViewController(summary: presentableResult.summary, answers: presentableResult.answers)
+        resultsVC.title = presentableResult.title
+        return resultsVC
     }
     
     func resultViewController(result: Result<Question<String>, [String]>) -> UIViewController {
