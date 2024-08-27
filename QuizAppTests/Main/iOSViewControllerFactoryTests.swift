@@ -15,11 +15,8 @@ public class iOSViewControllerFactoryTests: XCTestCase {
     let singleAnswerQuestion = Question.singleAnswer("Q1")
     let multipleAnswersQuestion = Question.multipleAnswers("Q1")
     let questionOptions = ["A1", "A2"]
-    
-    let userCorrectAnswers = [Question.singleAnswer("Q1"): ["A1"], Question.multipleAnswers("Q2"): ["A1", "A2"]]
-    let userWrongAnswers = [Question.singleAnswer("Q1"): ["A2"], Question.multipleAnswers("Q2"): ["A1", "A3"]]
-    let correctAnswers = [Question.singleAnswer("Q1"): ["A1"], Question.multipleAnswers("Q2"): ["A1", "A2"]]
-    let correctAnswersNew = [(Question.singleAnswer("Q1"), ["A1"]), (Question.multipleAnswers("Q2"),  ["A1", "A2"])]
+   
+    let correctAnswers = [(Question.singleAnswer("Q1"), ["A1"]), (Question.multipleAnswers("Q2"),  ["A1", "A2"])]
     let questions = [Question.singleAnswer("Q1"), Question.multipleAnswers("Q2")]
     
     func test_questionViewController_singleAnswer_createsControllerWithTitle() {
@@ -97,7 +94,7 @@ public class iOSViewControllerFactoryTests: XCTestCase {
   
     func makeSut(options: [Question<String>: [String]] = [Question.singleAnswer("Q1"): ["A1"]] ) -> iOSViewControllerFactory {
         return iOSViewControllerFactory(options: options,
-                                        correctAnswers: correctAnswersNew)
+                                        correctAnswers: correctAnswers)
     }
     
     func createQuestionViewController(question: Question<String>, isMultipleAnswersAllowed: Bool = false, callBack: @escaping ([String]) -> Void = { _ in }) -> QuestionViewController {
@@ -111,7 +108,7 @@ public class iOSViewControllerFactoryTests: XCTestCase {
                           (Question.multipleAnswers("Q2"), ["A2","A3"])]
        
         let resultPresenter = ResultsPresenter(userAnswers: answers,
-                                               correctAnswers: correctAnswersNew,
+                                               correctAnswers: correctAnswers,
                                                scorer: BasicScore.score)
         let controller = sut.resultViewController(for: answers) as? ResultViewController
         return (controller!, resultPresenter)
